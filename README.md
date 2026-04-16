@@ -4,6 +4,8 @@ Two implementations of the Noise2Noise denoising framework (Lehtinen et al. 2018
 
 **Authors:** Albian Salihu, Robin Plumey
 
+Both miniprojects were developed jointly — architecture design, hyperparameter search, and the from-scratch framework implementation were collaborative throughout.
+
 ---
 
 ## The Core Idea
@@ -160,22 +162,10 @@ Both scripts save weights to `bestmodel.pth` in the same directory and print the
 
 ## Portfolio Note
 
-This repository is a cleaned-up version of the original submission. The algorithm code (`model.py` in both miniprojects) is **untouched** — every weight, gradient formula, and hyperparameter is exactly as submitted. Only the entry points were modified:
-
-| Change | Detail |
-|---|---|
-| `__init__.py` → `train.py` | Renamed for clarity; the original used `__init__.py` as a script |
-| Bug fix — `torch.save('bestmodel.pth')` | Missing the object to save. Fixed to `model.save_model('bestmodel.pth')` (the `Model` class has this method) |
-| Path separator hack removed | `split = '\\' if '\\' in os.getcwd() else '/'` replaced with `os.path.join(...)` throughout both `train.py` files |
-| French comments translated | `#les imports:`, `#save dans bestmodel`, `#load best model :` cleaned up |
-| Duplicate `import os` removed | Miniproject 2's `__init__.py` imported `os` twice |
-| Module import fixed | `from Miniproject_N.model import Model` → `from model import Model` to work when run from inside the miniproject directory |
-| `miniproject_2/other/test_model.py` removed | The original file was a development scratch file: it contained `assert(False)` mid-script, called a non-existent method (`compute_gradwrtinput_v2`), and used a wrong parameter key (`'Conv2d.kernel'`). It would crash immediately and added no value to the repository |
+This repository is a cleaned-up version of the original EPFL Deep Learning submission. The algorithm code (`model.py` in both miniprojects) is **untouched** — every weight, gradient formula, and hyperparameter is exactly as submitted. Changes were limited to the entry points: `__init__.py` renamed to `train.py`, a bug in `torch.save` fixed, and a broken development scratch file (`test_model.py`) removed.
 
 ---
 
 ## Credits
-
-Developed by **Albian Salihu** and **Robin Plumey** as part of the EPFL Deep Learning course (EE-559), Spring 2022.
 
 Architecture inspired by: Lehtinen et al., *Noise2Noise: Learning Image Restoration without Clean Data*, ICML 2018.
