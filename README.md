@@ -101,7 +101,7 @@ The same Noise2Noise training objective is implemented without using `torch.nn` 
 - **`ADAM`** — full adaptive moment estimation with bias correction, implemented from scratch in `step_()`
 - **`Model`** — `Sequential` + `ADAM`; weights serialised to a human-readable text file (not binary)
 
-The architecture is a lightweight 3-layer CNN: 3 → 9 → 9 → 3 channels, with ReLU activations and a Sigmoid output.
+The architecture is a lightweight 6-layer Sequential: Conv2d(3→9) → ReLU → Conv2d(9→9) → ReLU → Conv2d(9→3) → Sigmoid.
 
 ### Convolution forward/backward
 
